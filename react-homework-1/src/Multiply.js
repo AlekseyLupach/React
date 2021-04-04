@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 
 export default class Multiply extends Component {
     render() {
-        const { multiply } = this.props
+        const { a, b } = this.props
         return (
             <p>
-                {multiply}
+                {a * b}
             </p>
         );
     }

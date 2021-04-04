@@ -3,7 +3,7 @@ import imgSrc from './111.jpg'
 
 export default class ImageOrButton extends Component {
     render() {
-        const isButton = true;
+        const { isButton } = this.props
         if (isButton == true)
             return (
                 <button>Кнопка</button>
