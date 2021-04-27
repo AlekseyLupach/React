@@ -27,17 +27,65 @@ const MyComponent = Feact.createClass({
         console.log('My Component')
     },
 
+    getInitialState() {
+        return { count: 0 };
+    },
+    shouldComponentUpdate() {
+        return true;
+    },
     render() {
         return Feact.createElement(InnerComponent, { message: this.props.message });
     },
 });
 
-Feact.render(
-    Feact.createElement("div", null, "Hello World"),
-    document.getElementById('root')
-);
+const Button = Feact.createClass({
+    getInitialState() {
+        return { count: 0 }
+    },
+
+    componentDidMount() {
+        setTimeout(() => {
+            this.setState(({ count }) => ({
+                count: count + 1,
+            }));
+
+            this.setState(({ count }) => ({
+                count: count + 2,
+            }));
+
+            this.setState(({ count }) => ({
+                count: count + 3,
+            }));
+        }, 2000)
+    },
+
+    render() {
+        console.log('render');
+        const { count } = this.state;
+
+        return Feact.createElement('button', null, count + '');
+    }
+})
+
+// Feact.render(
+//     Feact.createElement("div", null, "Hello World"),
+//     document.getElementById('root')
+// );
+
+// Feact.render(
+//     Feact.createElement(MyComponent, { message: "text" }),
+//     document.getElementById('root')
+// );
 
 Feact.render(
-    Feact.createElement(MyComponent, { message: "text" }),
-    document.getElementById('root')
+    Feact.createElement(Button), document.getElementById('root')
 );
+
+
+
+setTimeout(() => {
+    Feact.render(
+        Feact.createElement(MyComponent, { message: "new text" }),
+        document.getElementById('root')
+    );
+}, 2000)
